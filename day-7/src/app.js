@@ -1,5 +1,5 @@
 const express = require('express')
-const noteModel = require('./models/notes.modal')
+const noteModel = require('./models/notes.model')
 
 const app = express()
 
@@ -13,8 +13,6 @@ app.post('/notes', async (req, res) => {
     const notes = await noteModel.create({
         title, description
     })
-
-    console.log(notes)
 
     res.status(201).json({
         massage: 'Note created successfully',
