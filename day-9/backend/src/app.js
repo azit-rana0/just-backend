@@ -1,7 +1,6 @@
 const express = require('express')
 const noteModel = require('./models/note.model')
 const cors = require('cors')
-const path = require("path")
 
 const app = express()
 app.use(cors())
@@ -61,10 +60,6 @@ app.patch('/api/notes/:id', async (req, res) => {
     res.status(200).json({
         massage: 'note updated successfully',
     })
-})
-
-app.use("*name", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "/public/index.html"))
 })
 
 module.exports = app
