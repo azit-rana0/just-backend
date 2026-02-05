@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [editNoteId, setEditNoteId] = useState("")
   const [editNoteData, setEditNoteData] = useState({
     title: "",
@@ -12,9 +13,13 @@ const App = () => {
   })
 
   function fetchNotes() {
+    setLoading(true);
     axios.get('https://just-backend-l88m.onrender.com/api/notes')
       .then((res) => {
         setNotes(res.data.notes);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -101,39 +106,46 @@ const App = () => {
           </form>
         </div>
       )}
-
-      <div className="notes">
-        {notes.length > 0 ?
-          notes.map((note) => {
-            return (
-              <div key={note._id} className="note">
-                <h1>{note.title}</h1>
-
-                <div className="desc">
-                  <p>{note.description}</p>
-                </div>
-
-                <button onClick={() => {
-                  handleDeleteNote(note._id)
-                }} className="delete">Delete</button>
-
-                <button onClick={() => {
-                  setEditNoteId(note._id);
-                  setEditNoteData({
-                    title: note.title,
-                    description: note.description
-                  });
-                  setShow(true);
-                }} className="edit">Edit</button>
-
-              </div>)
-          }) :
+      < div className="notes">
+        {loading ? (
           <div className="loading-container">
             <div className="loader"></div>
-            <h2 className="loader-title">Loading... </h2>
-          </div>}
+            <h2 className="loader-title">Loading...</h2>
+          </div>
+        ) : (
+          notes.length > 0 ? (
+            notes.map((note) => {
+              return (
+                <div key={note._id} className="note">
+                  <h1>{note.title}</h1>
+
+                  <div className="desc">
+                    <p>{note.description}</p>
+                  </div>
+
+                  <button onClick={() => {
+                    handleDeleteNote(note._id)
+                  }} className="delete">Delete</button>
+
+                  <button onClick={() => {
+                    setEditNoteId(note._id);
+                    setEditNoteData({
+                      title: note.title,
+                      description: note.description
+                    });
+                    setShow(true);
+                  }} className="edit">Edit</button>
+
+                </div>)
+            })
+          ) : (
+            <div className="loading-container">
+              <h2 className="loader-title">No notes provided</h2>
+            </div>
+          )
+        )}
       </div>
-    </div>
+    </div >
   )
 }
 
