@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-const userVerify = (req, res, next) => {
+const identifyUser = (req, res, next) => {
     const token = req.cookies.token
 
     if (!token) {
@@ -18,10 +18,10 @@ const userVerify = (req, res, next) => {
         })
     }
 
-    req.user = decoded.id
+    req.user = decoded
 
     next()
 
 }
 
-module.exports = userVerify
+module.exports = identifyUser
