@@ -18,5 +18,12 @@ userRouter.post("/follow/:username", identifyUser, userController.followsUserCon
  */
 userRouter.post("/unfollow/:username", identifyUser, userController.unfollowsUserController)
 
+/**
+ * @route POST /api/users/status/:userId
+ * @description status a user
+ * @access Private
+ */
+
+userRouter.post("/status/:username", identifyUser, userController.updateFollowStatusController)
 
 module.exports = userRouter;
