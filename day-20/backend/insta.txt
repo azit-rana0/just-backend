@@ -1,0 +1,15 @@
+==> Authentication
+    => register (1. user kda data dave krna. 2. token user ko dena)
+    => login
+    => logout (token blacklistind)
+    => [OTP based registration] 
+
+==> post
+    => create
+    => can see the feed
+    => like posts (collection types)
+    => save post
+
+==> user 
+    => follower
+    => following
