@@ -54,7 +54,7 @@ const logincontroller = async (req, res) => {
             { username: username },
             { email: email }
         ]
-    })
+    }).select("+password")
 
     if (!user) {
         return res.status(404).json({

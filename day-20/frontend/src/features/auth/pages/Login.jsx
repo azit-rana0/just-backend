@@ -1,12 +1,12 @@
 import { Link } from 'react-router'
 import '../style/form.scss'
-import { userAuth } from '../hooks/useAuth'
+import { useAuth } from '../hooks/useAuth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 
 const Login = () => {
 
-    const { user, loading, handleLogin } = userAuth()
+    const { user, loading, handleLogin } = useAuth()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
